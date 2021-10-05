@@ -16,8 +16,10 @@ async function initModel(){
 async function detectVideo(video) {
   if (!video || video.paused) return false;
   const t0 = performance.now();
+  console.log("HEIGHT",video.videoHeight)
+  console.log("HEIGHT",video.videoWidth)
 
-  faceapi
+  if (video.videoHeight > 0 && video.videoWidth > 0) faceapi
   .detectAllFaces(video, optionsSSDMobileNet)
   .withFaceExpressions()
   .then((result) => {
@@ -30,7 +32,7 @@ async function detectVideo(video) {
     return true;
   })
   .catch((err) => {
-    console.log(err);
+    console.log("ERROR ON DETECTION", err);
     return false;
   });
 }
